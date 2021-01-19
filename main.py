@@ -52,17 +52,17 @@ class ProcessDrives():
                     """ Add a trip to an existing driver """
                     _, driver_name, start_time, end_time, miles_driven = line_array
                     driver = data[driver_name]
-                    traveled_hours = self.get_traveled_hours(
+                    traveled_hours = self.__get_traveled_hours(
                         start_time, end_time)
                     driver.add_trip(float(miles_driven), traveled_hours)
                 else:
                     print(
                         f"Warning: unknown command in {file_name} at line {line_index}. Line ignored.")
 
-            self.generate_report(data, file_name)
+            self.__generate_report(data)
             file.close()
 
-    def generate_report(self, data, file_name):
+    def __generate_report(self, data):
         """ 
         Description
         -----------
@@ -85,13 +85,6 @@ class ProcessDrives():
         for name, obj in sorted_drivers.items():
             miles = obj.get_total_miles()
 
-            # check for correct sorting order
-            if prev_miles is None:
-                prev_miles = miles
-            else:
-                assert prev_miles >= miles, "incorrect sorting order while generating report!"
-                prev_miles = miles
-
             if miles > 0:
                 rounded_miles = round(miles)
                 rounded_mph = round(obj.get_mph())
@@ -100,7 +93,7 @@ class ProcessDrives():
                 print(f"{name}: 0 miles")
         print()
 
-    def get_traveled_hours(self, start_time, end_time):
+    def __get_traveled_hours(self, start_time, end_time):
         """ Calculate hours traveled """
         time_format = "%H:%M"
         time_delta = datetime.strptime(

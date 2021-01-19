@@ -4,6 +4,7 @@
 
 consideration notes:
 
+- put the solution into a class: for code organization and testing.
 - assert statement to check correct sorting order instead of making the functionality into a separate method and test it using Pytest because the sorting code is pretty much a built-in python function. We just want to make sure the sorting code is not messed with and still correctly sorting the drivers by most miles to least.
 - virtual env or not (YES, assume production -> just better to keep things in a venv)
 - removed get_name and get_total_hours interfaces from the class because unused for our use case
