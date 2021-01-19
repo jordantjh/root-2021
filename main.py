@@ -81,8 +81,17 @@ class ProcessDrives():
         """
         sorted_drivers = dict(sorted(data.items(),
                                      key=lambda kv: kv[1].get_total_miles(), reverse=True))
+        prev_miles = None
         for name, obj in sorted_drivers.items():
             miles = obj.get_total_miles()
+
+            # check for correct sorting order
+            if prev_miles is None:
+                prev_miles = miles
+            else:
+                assert prev_miles >= miles, "incorrect sorting order while generating report!"
+                prev_miles = miles
+
             if miles > 0:
                 rounded_miles = round(miles)
                 rounded_mph = round(obj.get_mph())
