@@ -30,11 +30,12 @@ def generate_report(data):
             print(f"{name}: {rounded_miles} miles @ {rounded_mph} mph")
         else:
             print(f"{name}: 0 miles")
+    print()
 
 
 def main():
     try:
-        file = open("input2.txt", "r")
+        file = open("input1.txt", "r")
     except FileNotFoundError:
         sys.exit("Error: Input file not found.\nStopping execution.")
     except:
