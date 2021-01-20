@@ -71,7 +71,21 @@ def test_execute_calls_helpers_correctly(capfd, mocker):
     assert generate_report_mock.call_count == 2  # once for each valid file
 
 
+def test_main(mocker):
+    """ 
+    Ensure execute() is run in order to process the files
+    """
+    import main
+    execute_mock = mocker.patch.object(ProcessDrives, 'execute')
+    main.main()  # run the main function
+    execute_mock.assert_called_once()
+
+
 def test_init():
+    """
+    Ensure init() has a __name__ == __main__ check
+    and inside it, runs the main function wrapped in a system exit
+    """
     import main
     with mock.patch.object(main, "main", return_value=42):
         with mock.patch.object(main, "__name__", "__main__"):
