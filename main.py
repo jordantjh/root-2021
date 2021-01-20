@@ -24,8 +24,6 @@ class ProcessDrives():
             except FileNotFoundError:
                 print(f"Error: {file_name} not found.\nSkipping the file.\n")
                 continue
-            except:
-                sys.exit("Unknown error while reading files.")
 
             data = {}  # driver_name to driver_object map
 
@@ -36,17 +34,10 @@ class ProcessDrives():
                 except IndexError:
                     # skip empty line
                     continue
-                except:
-                    sys.exit(
-                        f"Unknown error processing line {line_index} in {file_name}.")
 
                 if command == Command.Driver.name:
                     """ Register a new driver """
-                    try:
-                        driver_name = line_array[1]
-                    except:
-                        sys.exit(
-                            f"Unknown error processing a Driver command in {file_name} at line {line_index}.")
+                    driver_name = line_array[1]  # assume Driver command is always valid
                     data[driver_name] = Driver(driver_name)
                 elif command == Command.Trip.name:
                     """ Add a trip to an existing driver """
@@ -101,6 +92,10 @@ class ProcessDrives():
         return time_delta.seconds / 3600  # convert from seconds to hours
 
 
-if __name__ == "__main__":
-    pd = ProcessDrives(INPUT_FILES)
-    pd.execute()
+def init():
+    if __name__ == "__main__":
+        pd = ProcessDrives(INPUT_FILES)
+        pd.execute()
+
+
+init()

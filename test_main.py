@@ -1,4 +1,5 @@
 import re
+import pytest
 from main import ProcessDrives
 from models import Driver
 
@@ -20,9 +21,11 @@ def test_generate_report(capfd):
     driver1_name = "driver1"
     driver2_name = "driver2"
     driver3_name = "driver3"
+    driver4_name = "driver4"
     driver1 = Driver(driver1_name)
     driver2 = Driver(driver2_name)
     driver3 = Driver(driver3_name)
+    driver4 = Driver(driver4_name)
     driver1.add_trip(50, 1.5)
     driver2.add_trip(1, 0.03)
     driver3.add_trip(100, 3)
@@ -30,14 +33,15 @@ def test_generate_report(capfd):
     mock_data = {
         driver1_name: driver1,
         driver2_name: driver2,
-        driver3_name: driver3
+        driver3_name: driver3,
+        driver4_name: driver4
     }
 
     PD._ProcessDrives__generate_report(mock_data)
     captured = capfd.readouterr()
 
     # capture all printed miles in an array
-    # eg: ['100 miles', '50 miles', '1 miles']
+    # eg: ['100 miles', '50 miles', '1 miles', '0 miles]
     miles = matches = re.findall(r"\d+ miles", captured.out)
 
     prev_miles = None
@@ -50,10 +54,10 @@ def test_generate_report(capfd):
             prev_miles = cur_miles
 
 
-def test_execute(capfd, mocker):
+def test_execute_calls_helpers_correctly(capfd, mocker):
     """
     Test that the program generates some std output and
-    invokes __get_traveled_hours() and __generate_report()
+    calls __get_traveled_hours() and __generate_report()
     """
     get_traveled_hours_mock = mocker.patch.object(
         ProcessDrives, '_ProcessDrives__get_traveled_hours')
@@ -64,3 +68,14 @@ def test_execute(capfd, mocker):
     assert captured.out != ""
     get_traveled_hours_mock.assert_called()
     assert generate_report_mock.call_count == 2  # once for each valid file
+
+
+# def test_init(mocker):
+#     import main
+#     execute_mock = mocker.patch.object(ProcessDrives, 'execute')
+#     # with mocker.patch.object(main, "init")
+#     with mocker.patch.object(main, "__name__", "__main__"):
+#         main.init()
+
+#     # assert class __init__ has been run, execute has been run
+#     execute_mock.assert_called_once()
