@@ -92,10 +92,15 @@ class ProcessDrives():
         return time_delta.seconds / 3600  # convert from seconds to hours
 
 
+def main():
+    pd = ProcessDrives(INPUT_FILES)
+    pd.execute()
+
+
 def init():
     if __name__ == "__main__":
-        pd = ProcessDrives(INPUT_FILES)
-        pd.execute()
+        sys.exit(main())
+        # main()
 
 
 init()

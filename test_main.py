@@ -1,5 +1,6 @@
 import re
 import pytest
+from unittest import mock
 from main import ProcessDrives
 from models import Driver
 
@@ -70,12 +71,10 @@ def test_execute_calls_helpers_correctly(capfd, mocker):
     assert generate_report_mock.call_count == 2  # once for each valid file
 
 
-# def test_init(mocker):
-#     import main
-#     execute_mock = mocker.patch.object(ProcessDrives, 'execute')
-#     # with mocker.patch.object(main, "init")
-#     with mocker.patch.object(main, "__name__", "__main__"):
-#         main.init()
-
-#     # assert class __init__ has been run, execute has been run
-#     execute_mock.assert_called_once()
+def test_init():
+    import main
+    with mock.patch.object(main, "main", return_value=42):
+        with mock.patch.object(main, "__name__", "__main__"):
+            with mock.patch.object(main.sys, 'exit') as mock_exit:
+                main.init()
+                assert mock_exit.call_args[0][0] == 42
