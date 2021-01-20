@@ -1,38 +1,70 @@
 # root-2021
 
-- python 3
+Programming Language: Python 3.9
 
-consideration notes:
-
-- JavaScript/TypeScript vs Python
-  eventually i found that Pytest offers less interfaces than what i'm used to do in Jasmine/Jest and enzyme. But the concepts are the same which i hope i have demonstrate enough via the pytest code
-- assume the commands are always valid, and no other variations.
-- left the test files out in the root directory and not in a separate "tests" folder because more work needs to be done to make relative imports work and also "folder structure" is not part of the evaluation.
-- put the solution into a class: for code organization and testing.
-- assert statement to check correct sorting order instead of making the functionality into a separate method and test it using Pytest because the sorting code is pretty much a built-in python function. We just want to make sure the sorting code is not messed with and still correctly sorting the drivers by most miles to least.
-- virtual env or not (YES, assume production -> just better to keep things in a venv)
-- removed get_name and get_total_hours interfaces from the class because unused for our use case
-- rounding up miles and hours to nearest integer only at the presentation end (not inside the driver class)
-  to keep the driver class data accurate so that it can be used in other code in the future.
-- driver object, track total travel time in hours or mins?
-- use dict to store name->driver_obj
-  assumption: no two drivers with the same name
-- assumption:
-  - only two possible commands
-    and assume no variation input patterns for those two commands
-
-# Environment Setup
+## Environment Setup
 
 0. Clone the repo and cd into the project folder
 1. Create a virtual environment
-   python -m venv venv
+   python -m venv myvenv
 2. Activate the virtual environment
-   Windows: ./venv/Scripts/activate
-   MacOS or Linux: source env/bin/activate
+   Windows: ./myvenv/Scripts/activate
+   MacOS or Linux: source myvenv/bin/activate
 3. Install the project dependencies
    pip install -r requirements.txt
 
-# Run the application
+- You can exit the virtual environment later with
+  deactivate
 
-cd root-2021
-python3 main.py
+## Run the App
+
+Execute main.py:
+
+```
+python main.py
+```
+
+## Test and Test Coverage
+
+To execute all unit tests:
+
+```
+pytest
+```
+
+To check the test coverage for each test file:
+
+```
+pytest --cov=main
+```
+
+```
+pytest --cov=models
+```
+
+## Engineering Considerations
+
+- JavaScript/TypeScript or Python?
+  The former is my current forte. However, Python seems to be the right tool for the task. If this was a real-world project at Root, I would approach it with Python. Hopefully this also demonstrated that I can adapt and learn on the go.
+  This becomes especially apparent when it comes to testing with Pytest which is considerably different from Jest/Enzyme/Jasmine/Sinon in terms of syntax and approaches but the general testing concept did transfer well.
+
+- Arranging the solutions into modular classes and functions makes the code more organized and easier to be tested.
+
+- Use a virtual environment or not?
+  Since it is generally a good practice to run and setup Python program in a virtual environment. I decided to follow so and included a guide to help users to do the same.
+
+- Initially there were more methods in the class "ProcessDrives", they were mainly getter methods for the class attributes. However, since my solution doesn't utilize them, I have decided to remove these interfaces to avoid confusions.
+
+- I am only rounding up the miles and hours at the point of presentation. In the "Driver" class itself, the attributes are stored as float to preserve accuracy.
+
+- Should I keep track of the time traveled by a driver in hours or minutes unit?
+  Since the "Driver" class will have to calculate mph, I have decided to go with hours unit.
+
+- Since folder structure is not mentioned to be part of the evaluation criteria, I have left the test files in the root directory instead of keeping them in a "tests" folder for example because it requires a little more work to make relative imports work.
+
+## Assumptions
+
+1. Assume no two drivers have the same name.
+2. Assume only two possible commands as mentioned in the problem statement and that these commands will always appear with correct formats and values.
+3. Assume "Driver" command will precede "Trip" commands for a particular driver.
+4. Assume "Driver" command for the same driver name will only appear once in a .txt file.
