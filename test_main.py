@@ -1,8 +1,8 @@
+import re
 from main import ProcessDrives
 from models import Driver
-import re
 
-MOCK_INPUT_FILES = ["1.txt"]
+MOCK_INPUT_FILES = ["unknown.txt", "input1.txt", "input2.txt", "unknown2.txt"]
 PD = ProcessDrives(MOCK_INPUT_FILES)
 
 
@@ -48,3 +48,19 @@ def test_generate_report(capfd):
         else:
             assert prev_miles >= cur_miles
             prev_miles = cur_miles
+
+
+def test_execute(capfd, mocker):
+    """
+    Test that the program generates some std output and
+    invokes __get_traveled_hours() and __generate_report()
+    """
+    get_traveled_hours_mock = mocker.patch.object(
+        ProcessDrives, '_ProcessDrives__get_traveled_hours')
+    generate_report_mock = mocker.patch.object(
+        ProcessDrives, '_ProcessDrives__generate_report')
+    PD.execute()
+    captured = capfd.readouterr()
+    assert captured.out != ""
+    get_traveled_hours_mock.assert_called()
+    assert generate_report_mock.call_count == 2  # once for each valid file

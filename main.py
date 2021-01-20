@@ -38,7 +38,7 @@ class ProcessDrives():
                     continue
                 except:
                     sys.exit(
-                        f"Unknown error processing a line in {file_name}.")
+                        f"Unknown error processing line {line_index} in {file_name}.")
 
                 if command == Command.Driver.name:
                     """ Register a new driver """

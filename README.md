@@ -4,6 +4,9 @@
 
 consideration notes:
 
+- JavaScript/TypeScript vs Python
+  eventually i found that Pytest offers less interfaces than what i'm used to do in Jasmine/Jest and enzyme. But the concepts are the same which i hope i have demonstrate enough via the pytest code
+- left the test files out in the root directory and not in a separate "tests" folder because more work needs to be done to make relative imports work and also "folder structure" is not part of the evaluation.
 - put the solution into a class: for code organization and testing.
 - assert statement to check correct sorting order instead of making the functionality into a separate method and test it using Pytest because the sorting code is pretty much a built-in python function. We just want to make sure the sorting code is not messed with and still correctly sorting the drivers by most miles to least.
 - virtual env or not (YES, assume production -> just better to keep things in a venv)
