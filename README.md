@@ -31,6 +31,7 @@ python main.py
 
 ## Test and Test Coverage
 
+_Note: Pytest doesn't seem to support macOS at the moment._<br/>
 To execute all unit tests, run at the root directory:
 
 ```
@@ -46,7 +47,7 @@ pytest --cov ./tests/
 ## Engineering Considerations
 
 - JavaScript/TypeScript or Python?<br/>
-  The former is my current forte. However, Python seems to be the right tool for the task. If this was a real-world project at Root, I would approach it with Python. Hopefully, this also demonstrated my ability to adapt and learn on the go.
+  The former is my current forte. However, Python seems to be a more suitable tool for the task. If this was a real-world project at Root, I would approach it with Python. Hopefully, this also demonstrated my ability to adapt and learn on the go.
   This becomes especially apparent when it comes to testing with Pytest which is considerably different from Jest/Enzyme/Jasmine/Sinon in terms of syntax and approaches but the general testing concept did transfer well.
 
 - How should the program accept filenames from my users?<br/>
