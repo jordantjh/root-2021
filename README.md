@@ -32,7 +32,7 @@ python main.py
 ## Test and Test Coverage
 
 _Note: Pytest doesn't seem to support macOS at the moment._<br/>
-To execute all unit tests, run at the root directory:
+<br/>To execute all unit tests, run at the root directory:
 
 ```
 pytest
@@ -58,11 +58,11 @@ pytest --cov ./tests/
   Inside ProcessDrives, I have also factored out some helper functions, again, for readability and testing purposes.
   And in main.py, I simply instantiate and execute on the solution class.
 
-- Should I check for mph <5 and >100 outside or inside of Driver class?
-  I decided to do the check inside the Driver class itself because this is a piece of logic concerning how we handle the Trip command (add_trip() in the Driver class) which should be abstracted out to the class consumer. And later, if we want to change the two boundary numbers, we can easily change them inside the Driver class without affecting the consumer of the class.
+- Should I check for mph <5 and >100 outside or inside of Driver class?<br/>
+  I decided to do the check inside the Driver class itself because this is a piece of logic concerning how we handle the Trip command (add_trip() in the Driver class) which should be abstracted out from the class consumer. And later, if we want to change the two boundary numbers, we can easily change them inside the Driver class without affecting the consumer of the class.
 
 - Use a virtual environment or not?<br/>
-  Since it is generally a good practice to run and set up a Python program in a virtual environment. I decided to follow so and included a guide to help users to do the same.
+  Since it is generally a good practice to run and set up a Python program in a virtual environment. I decided to follow so and included a guide under "Environment Setup" section to help users to do the same.
 
 - Initially, there were more methods in Driver class, they were mainly getter methods that expose class attributes. However, since my solution doesn't utilize them, I have decided to remove these interfaces to avoid confusion.
 
