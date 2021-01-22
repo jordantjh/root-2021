@@ -1,6 +1,6 @@
 import re
-from ProcessDrives import ProcessDrives
-from Driver import Driver
+from models.ProcessDrives import ProcessDrives
+from models.Driver import Driver
 
 MOCK_INPUT_FILES = ["unknown.txt", "input1.txt", "input2.txt", "unknown2.txt"]
 PD = ProcessDrives(MOCK_INPUT_FILES)

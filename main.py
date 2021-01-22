@@ -1,5 +1,5 @@
 import sys
-from ProcessDrives import ProcessDrives
+from models.ProcessDrives import ProcessDrives
 
 # configure your input files here
 INPUT_FILES = ["input1.txt", "unknown.txt", "input2.txt"]

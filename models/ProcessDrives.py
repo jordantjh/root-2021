@@ -1,6 +1,6 @@
 from enum import Enum
 from datetime import datetime
-from Driver import Driver
+from models.Driver import Driver
 
 
 class Command(Enum):
