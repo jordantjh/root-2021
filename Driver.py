@@ -1,11 +1,3 @@
-from enum import Enum
-
-
-class Command(Enum):
-    Driver = 1
-    Trip = 2
-
-
 class Driver:
     def __init__(self, name):
         self.__name = name
@@ -13,8 +5,12 @@ class Driver:
         self.__total_hours = 0
 
     def add_trip(self, miles, hours):
-        self.__total_miles += miles
-        self.__total_hours += hours
+        mph = miles / hours
+
+        # ignore trips with mph < 5 and > 100
+        if not (mph < 5 or mph > 100):
+            self.__total_miles += miles
+            self.__total_hours += hours
 
     def get_total_miles(self):
         return self.__total_miles
